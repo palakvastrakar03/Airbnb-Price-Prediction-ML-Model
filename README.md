@@ -125,12 +125,18 @@ Airbnb-Price-Prediction-ML-Model/
 ## How to Run the Project
 1. Clone the repository:
    ```bash
-   git clone https://github.com/palakvastrakar03/Airbnb-Price-Prediction-ML-Model.gitcd Airbnb-Price-Prediction-ML-Model
-2. Install dependencies:
+   git clone https://github.com/palakvastrakar03/Airbnb-Price-Prediction-ML-Model.git
+   cd Airbnb-Price-Prediction-ML-Model
+2. Virtual Environment Setup
+   ```bash
+   python -m venv venv
+   venv\Scripts\activate
+   ```
+3. Install dependencies:
    pip install -r requirements.txt
-3. Open and run the notebook:
+4. Open and run the notebook:
    jupyter notebook
-4. Run the API
+5. Run the API
    python app.py
 
    API will be available at: http://127.0.0.1:5000
