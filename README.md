@@ -1,112 +1,141 @@
-# Airbnb Price Prediction – Machine Learning Model
+# Airbnb Price Prediction – End-to-End Machine Learning System
 
-## Project Overview
-This project implements an end-to-end Machine Learning pipeline to predict Airbnb listing prices based on property characteristics, host details, location attributes, and review metrics. The goal is to estimate optimal pricing using data-driven techniques.
+## Overview
+This project presents a **production-ready, end-to-end machine learning pipeline** for predicting Airbnb listing prices using structured data. It demonstrates best practices across **EDA, feature engineering, preprocessing, model training, evaluation, and API deployment readiness**.
 
-The project includes:
-- Exploratory Data Analysis (EDA)
-- Feature Engineering
-- Data Preprocessing
-- Model Training and Evaluation
-- Performance Analysis
+The model predicts **`log_price`** to stabilize variance and improve regression performance.
+
+---
+
+## Highlights
+- Clean, modular ML pipeline (Scikit-learn Pipelines + ColumnTransformer)
+- Strong tabular model (**XGBoost Regressor**) with tuned hyperparameters
+- Reproducible evaluation metrics
+- Flask API for inference
+- GitHub-ready structure with clear separation of concerns
 
 ---
 
 ## Problem Statement
-Airbnb listing prices vary significantly depending on several factors such as:
+Airbnb prices vary widely based on:
 - Property type and capacity
-- Geographic location
+- Location (city, neighborhood, geo-coordinates)
 - Host experience and responsiveness
-- Reviews and amenities
+- Reviews, amenities, and booking policies
 
-Manual pricing often results in suboptimal estimates. This project aims to predict the logarithm of the listing price (`log_price`) using supervised machine learning models.
+Manual pricing is often inaccurate.  
+**Objective:** Predict the logarithm of Airbnb listing prices (`log_price`) using supervised ML to enable data-driven pricing.
 
 ---
 
 ## Dataset
-- Source: Airbnb Open Dataset
-- Target Variable: `log_price`
-- Data Type: Structured tabular data
+- **Source:** Airbnb Open Dataset  
+- **Target Variable:** `log_price`  
+- **Type:** Structured tabular data  
 
-The dataset is loaded using a public URL or local path and is not stored directly in the repository to avoid large file size issues.
+
 
 ---
 
 ## Feature Engineering
-The following engineered features were used:
-- Amenities Count: Number of amenities offered by the property
-- Host Experience Days: Number of days since the host joined Airbnb
-- Days Since Last Review
-- City Average Price: Mean listing price per city
-- Location Clusters: KMeans clustering using latitude and longitude
-- Host Response Rate: Converted to numeric percentage
-- Boolean Feature Standardization
+Engineered features used to improve predictive power:
+- **Amenities Count**
+- **Host Experience (days since joining)**
+- **Days Since Last Review**
+- **City-Level Average Price**
+- **Location Clusters** (KMeans on latitude & longitude)
+- **Host Response Rate** (converted to numeric percentage)
+- **Standardized Boolean Features**
 
 ---
 
 ## Data Preprocessing
-- Missing numerical values filled using median values
-- Numerical features scaled using `StandardScaler`
-- Categorical features encoded using `OneHotEncoder`
-- Boolean features converted to binary format
-- Pipeline-based preprocessing using `ColumnTransformer`
+- Missing numerical values → median imputation  
+- Numerical features → `StandardScaler`  
+- Categorical features → `OneHotEncoder(handle_unknown="ignore")`  
+- Boolean features → binary encoding  
+- Unified preprocessing using **ColumnTransformer**
 
 ---
 
-## Machine Learning Model
-- Algorithm: XGBoost Regressor
-- Reason for Selection: Handles non-linear relationships and feature interactions efficiently
-- Training Strategy:
-  - Pipeline-based training
-  - Train-test split (80:20)
-  - Tuned hyperparameters for improved performance
+## Model
+### Algorithm
+**XGBoost Regressor**
+
+### Why XGBoost?
+- Captures non-linear relationships
+- Handles feature interactions efficiently
+- Excellent performance on structured/tabular datasets
+
+### Training Strategy
+- Pipeline-based training (preprocessing + model)
+- Train/Test split: **80 / 20**
+- Tuned hyperparameters for improved generalization
 
 ---
 
-## Model Performance
-
+## Performance
 | Metric | Value |
 |------|------|
 | RMSE | ~0.37 |
 | MAE  | ~0.26 |
-| R² Score | ~0.73 |
+| R²   | ~0.73 |
 
-The model explains approximately 73 percent of the variance in Airbnb listing prices.
+The model explains approximately **73% of the variance** in Airbnb listing prices.
 
 ---
 
 ## Evaluation Metrics
-- Root Mean Squared Error (RMSE)
-- Mean Absolute Error (MAE)
-- R² Score
-<img width="740" height="96" alt="image" src="https://github.com/user-attachments/assets/e3b84d1f-3f6f-436c-bb54-117a3bf48c6c" />
-
-These metrics provide a balanced evaluation of model accuracy and robustness.
+- **RMSE** – Penalizes large errors
+- **MAE** – Interpretable absolute error
+- **R² Score** – Explained variance
+<img width="740" height="96" alt="Screenshot 2025-12-27 140147" src="https://github.com/user-attachments/assets/1f7dc323-0498-4d19-ba0c-4398642b4e46" />
 
 ---
 
+
 ## Project Structure
-
+ ```
 Airbnb-Price-Prediction-ML-Model/
-
-<img width="335" height="222" alt="image" src="https://github.com/user-attachments/assets/07151307-8fcf-4cb3-8f40-8701011b7392" />
-
-
-├── Airbnb Price Prediction.ipynb
+│
+├── app.py
 ├── README.md
 ├── requirements.txt
-|── .gitignore
+├── .gitignore
+│
+├── notebook/
+│   └── exploration.ipynb
+│
+├── models/
+│   └── xgb_price_pipeline.pkl
+│
+└── src/
+    ├── __init__.py
+    ├── data_preprocessing.py
+    ├── feature_engineering.py
+    ├── model_training.py
+    ├── model_evaluation.py
+    └── predict.py
+ ```
+
+<img width="331" height="597" alt="image" src="https://github.com/user-attachments/assets/f605eda2-8085-4560-8559-344cacc38ef9" />
 
 ---
 
 ## How to Run the Project
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/Airbnb-Price-Prediction-ML-Model.git
+   git clone https://github.com/palakvastrakar03/Airbnb-Price-Prediction-ML-Model.gitcd Airbnb-Price-Prediction-ML-Model
 2. Install dependencies:
    pip install -r requirements.txt
 3. Open and run the notebook:
    jupyter notebook
+4. Run the API
+   python app.py
+
+   API will be available at: http://127.0.0.1:5000
+
+---
 
 ## Technologies Used
 
@@ -120,23 +149,52 @@ XGBoost
 
 Matplotlib and Seaborn
 
+Flask 
+
 Jupyter Notebook
+
+---
+
+##  API Example
+
+POST /predict
+
+Request:
+```json
+{
+  "accommodates": 2,
+  "bedrooms": 1,
+  "bathrooms": 1,
+  "city": "NYC",
+  "room_type": "Entire home/apt"
+}
+```
+
+Response:
+```{
+  "predicted_log_price": 5.20
+}
+```
+
+---
 
 ## Future Enhancements
 
-Hyperparameter optimization using GridSearch or Optuna
+- Hyperparameter optimization using Optuna or GridSearchCV
+- Model explainability using SHAP values
+- Ensemble learning using XGBoost and LightGBM
+- Containerization using Docker
+- CI/CD pipeline for automated testing and deployment
+- Cloud deployment (Render / AWS / Azure / GCP)
+- Frontend UI for user-friendly price prediction
 
-Model deployment using Flask or FastAPI
-
-Ensemble modeling using XGBoost and LightGBM
-
-Feature importance visualization
-
-Model explainability using SHAP
+---
 
 ## Author
 
 Palak Vastrakar
+
+---
 
 ## Acknowledgements
 
