@@ -79,6 +79,7 @@ The model explains approximately 73 percent of the variance in Airbnb listing pr
 - Root Mean Squared Error (RMSE)
 - Mean Absolute Error (MAE)
 - R² Score
+<img width="740" height="96" alt="image" src="https://github.com/user-attachments/assets/e3b84d1f-3f6f-436c-bb54-117a3bf48c6c" />
 
 These metrics provide a balanced evaluation of model accuracy and robustness.
 
@@ -88,12 +89,13 @@ These metrics provide a balanced evaluation of model accuracy and robustness.
 
 Airbnb-Price-Prediction-ML-Model/
 
+<img width="335" height="222" alt="image" src="https://github.com/user-attachments/assets/07151307-8fcf-4cb3-8f40-8701011b7392" />
+
+
 ├── Airbnb Price Prediction.ipynb
 ├── README.md
 ├── requirements.txt
 |── .gitignore
-
-
 
 ---
 
