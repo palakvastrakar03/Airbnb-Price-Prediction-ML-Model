@@ -14,5 +14,6 @@ data/
 .ipynb_checkpoints/
 
 # Environment / IDE
+venv/
 .env
 .vscode/
